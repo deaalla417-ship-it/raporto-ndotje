@@ -29,30 +29,52 @@
       border: none;
       cursor: pointer;
     }
+
+    img {
+      max-width: 100%;
+      margin-top: 10px;
+      display: none;
+    }
   </style>
 </head>
 
 <body>
 
-  <div class="box">
-    <h1>Raporto Ndotje 🌍</h1>
-    <p>Shkruaj ku ka ndotje ne lagjen tende.</p>
+<div class="box">
+  <h1>Raporto Ndotje 🌍</h1>
+  <p>Shkruaj dhe dergo foto te ndotjes ne lagjen tende.</p>
 
-    <input id="location" placeholder="Lagjja / Qyteti">
-    <textarea id="problem" placeholder="Pershkruaj problemin"></textarea>
+  <input type="text" id="location" placeholder="Lagjja / Qyteti">
 
-    <button onclick="sendReport()">Dergo Raportin</button>
+  <textarea id="problem" placeholder="Pershkruaj problemin"></textarea>
 
-    <p id="msg"></p>
-  </div>
+  <input type="file" id="image" accept="image/*">
 
-  <script>
-    function sendReport() {
-      document.getElementById("msg").innerHTML =
-        "Raporti u dergua! Faleminderit qe po ndihmon mjedisin 💚";
+  <button onclick="sendReport()">Dergo Raportin</button>
+
+  <p id="msg"></p>
+
+  <img id="preview">
+</div>
+
+<script>
+function sendReport() {
+  let file = document.getElementById("image").files[0];
+
+  if (file) {
+    let reader = new FileReader();
+    reader.onload = function(e) {
+      let img = document.getElementById("preview");
+      img.src = e.target.result;
+      img.style.display = "block";
     }
-  </script>
+    reader.readAsDataURL(file);
+  }
+
+  document.getElementById("msg").innerHTML =
+    "Raporti u dergua! Faleminderit 💚";
+}
+</script>
 
 </body>
 </html>
-
