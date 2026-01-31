@@ -5,17 +5,18 @@
 <title>Raporto Ndotje</title>
 
 <style>
+    /* BODY & SFONDI */
     body {
         margin: 0;
         padding: 0;
         font-family: Arial, sans-serif;
-        background-image: url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6');
+        background-image: url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1500&q=80');
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
     }
 
-    /* KARTA (korniza rreth formularit) */
+    /* KARTA (FORMULARI) */
     .card {
         width: 380px;
         margin: 60px auto;
@@ -72,7 +73,7 @@
         transform: scale(1.03);
     }
 
-    /* Animacioni */
+    /* ANIMACIONI KARTA */
     @keyframes fadeIn {
         from { opacity: 0; transform: translateY(20px); }
         to   { opacity: 1; transform: translateY(0); }
@@ -100,13 +101,14 @@
         font-size: 24px;
         cursor: pointer;
         transition: 0.2s;
+        text-decoration: none;
     }
 
     .sidebar a:hover {
         transform: translateX(7px);
     }
 
-    /* Mesazhi Motivues */
+    /* MESAZHI MOTIVUES */
     .motivation-box {
         position: fixed;
         bottom: 20px;
@@ -120,7 +122,7 @@
         backdrop-filter: blur(4px);
     }
 
-    /* Animacione Lulesh */
+    /* ANIMACIONI I LULEVE */
     .flowers {
         position: fixed;
         top: 0;
@@ -145,10 +147,43 @@
         100% { transform: translateY(0) rotate(0deg); }
     }
 
+    /* POPUP MODERN */
+    #popup {
+        display:none;
+        position:fixed;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%);
+        background: rgba(255,255,255,0.95);
+        padding:20px;
+        border-radius:12px;
+        box-shadow:0 6px 20px rgba(0,0,0,0.4);
+        z-index:1000;
+        font-size:16px;
+        text-align:center;
+        opacity:0;
+        transition: opacity 0.4s;
+    }
+
+    #popup button {
+        padding:8px 16px;
+        border:none;
+        background:#0a7f1c;
+        color:white;
+        border-radius:6px;
+        cursor:pointer;
+        transition:0.3s;
+    }
+
+    #popup button:hover {
+        background:#0eb423;
+    }
+
 </style>
 </head>
 <body>
 
+<!-- FORMULARI -->
 <div class="card">
     <h2>Raporto Ndotje 🌍</h2>
     <p>Shkruaj dhe dergo foto te ndotjes ne lagjen tende.</p>
@@ -160,26 +195,47 @@
     <button class="btn">Dërgo Raportin</button>
 </div>
 
-<!-- SIDEBAR -->
+<!-- SIDEBAR FUNKSIONAL -->
 <div class="sidebar">
-    <a title="Shto Foto">📷</a>
-    <a title="Lokacioni">📍</a>
-    <a title="Këshilla">♻</a>
-    <a title="Informacion">ℹ</a>
+    <a href="#" onclick="showPopup('Foto: Mund të ngarkoni foto të ndotjes.')">📷</a>
+    <a href="#" onclick="showPopup('Lokacion: Shkruani lagjen ose vendndodhjen.')">📍</a>
+    <a href="#" onclick="showPopup('Këshilla: Riciklo dhe ruaj natyrën.')">♻</a>
+    <a href="#" onclick="showPopup('Informacion: Kjo faqe ndihmon të raportoni ndotjen.')">ℹ</a>
 </div>
 
-<!-- Mesazh motivues -->
+<!-- MESAZH MOTIVUES -->
 <div class="motivation-box">
     “Ruaj natyrën, ruaj të ardhmen 🌿”
 </div>
 
-<!-- Animacion lulesh -->
+<!-- ANIMACIONI I LULEVE -->
 <div class="flowers">
-    <img src="https://pngimg.com/d/leaf_PNG3640.png" class="flower f1">
-    <img src="https://pngimg.com/d/leaf_PNG3640.png" class="flower f2">
-    <img src="https://pngimg.com/d/leaf_PNG3640.png" class="flower f3">
+    <img src="https://i.ibb.co/k53VJxm/leaf.png" class="flower f1">
+    <img src="https://i.ibb.co/k53VJxm/leaf.png" class="flower f2">
+    <img src="https://i.ibb.co/k53VJxm/leaf.png" class="flower f3">
 </div>
+
+<!-- POPUP FUNKSIONAL -->
+<div id="popup">
+    <span id="popup-text"></span>
+    <br><br>
+    <button onclick="closePopup()">Mbyll</button>
+</div>
+
+<script>
+function showPopup(message) {
+    const popup = document.getElementById('popup');
+    document.getElementById('popup-text').innerText = message;
+    popup.style.display = 'block';
+    setTimeout(() => { popup.style.opacity = '1'; }, 10); // efekt fade-in
+}
+
+function closePopup() {
+    const popup = document.getElementById('popup');
+    popup.style.opacity = '0'; // fade-out
+    setTimeout(() => { popup.style.display = 'none'; }, 400);
+}
+</script>
 
 </body>
 </html>
-
