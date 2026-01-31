@@ -77,6 +77,74 @@
         from { opacity: 0; transform: translateY(20px); }
         to   { opacity: 1; transform: translateY(0); }
     }
+
+    /* SIDEBAR */
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        background: rgba(255,255,255,0.85);
+        padding: 12px;
+        border-radius: 0 12px 12px 0;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        backdrop-filter: blur(4px);
+        z-index: 999;
+    }
+
+    .sidebar a {
+        padding: 14px;
+        margin: 6px 0;
+        font-size: 24px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .sidebar a:hover {
+        transform: translateX(7px);
+    }
+
+    /* Mesazhi Motivues */
+    .motivation-box {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: rgba(255,255,255,0.85);
+        padding: 14px 20px;
+        border-radius: 14px;
+        color: #1e7f2e;
+        font-size: 16px;
+        box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+        backdrop-filter: blur(4px);
+    }
+
+    /* Animacione Lulesh */
+    .flowers {
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+    }
+
+    .flower {
+        position: absolute;
+        width: 80px;
+        opacity: 0.7;
+        animation: flowerFloat 8s infinite ease-in-out;
+    }
+
+    .f1 { top: 10%; left: 10%; animation-delay: 0s; }
+    .f2 { top: 40%; left: 80%; animation-delay: 1s; }
+    .f3 { top: 70%; left: 30%; animation-delay: 2s; }
+
+    @keyframes flowerFloat {
+        0% { transform: translateY(0) rotate(0deg); }
+        50% { transform: translateY(-20px) rotate(5deg); }
+        100% { transform: translateY(0) rotate(0deg); }
+    }
+
 </style>
 </head>
 <body>
@@ -90,6 +158,26 @@
     <input type="file">
 
     <button class="btn">Dërgo Raportin</button>
+</div>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <a title="Shto Foto">📷</a>
+    <a title="Lokacioni">📍</a>
+    <a title="Këshilla">♻</a>
+    <a title="Informacion">ℹ</a>
+</div>
+
+<!-- Mesazh motivues -->
+<div class="motivation-box">
+    “Ruaj natyrën, ruaj të ardhmen 🌿”
+</div>
+
+<!-- Animacion lulesh -->
+<div class="flowers">
+    <img src="https://pngimg.com/d/leaf_PNG3640.png" class="flower f1">
+    <img src="https://pngimg.com/d/leaf_PNG3640.png" class="flower f2">
+    <img src="https://pngimg.com/d/leaf_PNG3640.png" class="flower f3">
 </div>
 
 </body>
