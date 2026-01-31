@@ -1,80 +1,96 @@
-<!DOCTYPE html>
-<html>
+!DOCTYPE html>
+<html lang="sq">
 <head>
-  <title>Raporto Ndotje</title>
-  <style>
+<meta charset="UTF-8">
+<title>Raporto Ndotje</title>
+
+<style>
     body {
-      font-family: Arial;
-      background: #f2f2f2;
-      padding: 20px;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-image: url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
     }
 
-    .box {
-      background: white;
-      padding: 20px;
-      max-width: 500px;
-      margin: auto;
-      border-radius: 10px;
+    /* KARTA (korniza rreth formularit) */
+    .card {
+        width: 380px;
+        margin: 60px auto;
+        padding: 25px;
+        background: rgba(255, 255, 255, 0.92);
+        border-radius: 14px;
+        box-shadow: 0 4px 30px rgba(0,0,0,0.25);
+        animation: fadeIn 1.2s ease;
+        text-align: center;
+        backdrop-filter: blur(3px);
     }
 
-    input, textarea, button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
+    h2 {
+        margin-top: 0;
+        font-size: 26px;
     }
 
-    button {
-      background: green;
-      color: white;
-      border: none;
-      cursor: pointer;
+    p {
+        font-size: 14px;
+        color: #444;
     }
 
-    img {
-      max-width: 100%;
-      margin-top: 10px;
-      display: none;
+    /* INPUTET */
+    input[type="text"],
+    input[type="file"] {
+        width: 95%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        transition: 0.3s;
     }
-  </style>
+
+    input:focus {
+        border-color: #2ea44f;
+        box-shadow: 0 0 6px rgba(0, 180, 0, 0.3);
+    }
+
+    /* BUTONI */
+    .btn {
+        width: 100%;
+        padding: 12px;
+        background: #0a7f1c;
+        border: none;
+        color: white;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .btn:hover {
+        background: #0eb423;
+        transform: scale(1.03);
+    }
+
+    /* Animacioni */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+</style>
 </head>
-
 <body>
 
-<div class="box">
-  <h1>Raporto Ndotje 🌍</h1>
-  <p>Shkruaj dhe dergo foto te ndotjes ne lagjen tende.</p>
+<div class="card">
+    <h2>Raporto Ndotje 🌍</h2>
+    <p>Shkruaj dhe dergo foto te ndotjes ne lagjen tende.</p>
 
-  <input type="text" id="location" placeholder="Lagjja / Qyteti">
+    <input type="text" placeholder="Lagjja / Qyteti">
+    <input type="text" placeholder="Përshkruaj problemin">
+    <input type="file">
 
-  <textarea id="problem" placeholder="Pershkruaj problemin"></textarea>
-
-  <input type="file" id="image" accept="image/*">
-
-  <button onclick="sendReport()">Dergo Raportin</button>
-
-  <p id="msg"></p>
-
-  <img id="preview">
+    <button class="btn">Dërgo Raportin</button>
 </div>
-
-<script>
-function sendReport() {
-  let file = document.getElementById("image").files[0];
-
-  if (file) {
-    let reader = new FileReader();
-    reader.onload = function(e) {
-      let img = document.getElementById("preview");
-      img.src = e.target.result;
-      img.style.display = "block";
-    }
-    reader.readAsDataURL(file);
-  }
-
-  document.getElementById("msg").innerHTML =
-    "Raporti u dergua! Faleminderit 💚";
-}
-</script>
 
 </body>
 </html>
