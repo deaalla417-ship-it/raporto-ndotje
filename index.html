@@ -82,8 +82,34 @@
     <input type="text" id="description" placeholder="Përshkruaj problemin">
     <input type="file" id="image">
     <img id="preview">
-    <button class="btn" onclick="sendReport()">Dërgo Raportin</button>
-    <p id="msg"></p>
+    <button onclick="sendReport()">Dergo Raportin</button>
+
+  <p id="msg"></p>
+
+  <img id="preview">
+</div>
+
+<script>
+function sendReport() {
+  let file = document.getElementById("image").files[0];
+
+  if (file) {
+    let reader = new FileReader();
+    reader.onload = function(e) {
+      let img = document.getElementById("preview");
+      img.src = e.target.result;
+      img.style.display = "block";
+    }
+    reader.readAsDataURL(file);
+  }
+
+  document.getElementById("msg").innerHTML =
+    "Raporti u dergua! Faleminderit 💚";
+}
+</script>
+
+</body>
+</html>
 </div>
 
 <!-- FIREBASE -->
@@ -152,6 +178,7 @@ async function sendReport() {
 
 </body>
 </html>
+
 
 
 
