@@ -190,24 +190,74 @@
     <button onclick="closePopup()">Mbyll</button>
 </div>
 
+<!-- FIREBASE -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  // Vendos të dhënat e projektit tënd Firebase këtu
+  const firebaseConfig = {
+    apiKey: "API_KEY",
+    authDomain: "PROJECT_ID.firebaseapp.com",
+    projectId: "PROJECT_ID",
+    storageBucket: "PROJECT_ID.appspot.com",
+    messagingSenderId: "XXXX",
+    appId: "XXXX"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  const button = document.querySelector(".btn");
+
+  button.addEventListener("click", async () => {
+    const inputs = document.querySelectorAll("input[type='text']");
+    const vendndodhja = inputs[0].value;
+    const pershkrimi = inputs[1].value;
+
+    if (!vendndodhja || !pershkrimi) {
+      alert("Plotëso të gjitha fushat!");
+      return;
+    }
+
+    try {
+      await addDoc(collection(db, "raportime"), {
+        vendndodhja: vendndodhja,
+        pershkrimi: pershkrimi,
+        data: new Date()
+      });
+
+      alert("Raporti u dërgua me sukses!");
+      
+      // Pastrimi i fushave
+      inputs[0].value = "";
+      inputs[1].value = "";
+      document.querySelector("input[type='file']").value = "";
+
+    } catch (e) {
+      console.error("Gabim:", e);
+      alert("Diçka shkoi gabim. Provoni përsëri.");
+    }
+  });
+</script>
+
 <script>
 function showPopup(message) {
     const popup = document.getElementById('popup');
     document.getElementById('popup-text').innerText = message;
     popup.style.display = 'block';
-    setTimeout(() => { popup.style.opacity = '1'; }, 10); // efekt fade-in
+    setTimeout(() => { popup.style.opacity = '1'; }, 10);
 }
 
 function closePopup() {
     const popup = document.getElementById('popup');
-    popup.style.opacity = '0'; // fade-out
+    popup.style.opacity = '0';
     setTimeout(() => { popup.style.display = 'none'; }, 400);
 }
 </script>
 
 </body>
 </html>
-    
 
 
 
