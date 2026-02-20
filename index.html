@@ -5,152 +5,210 @@
 <title>Raporto Ndotje</title>
 
 <style>
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-image: url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1500&q=80');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-}
-.card {
-    width: 380px;
-    margin: 60px auto;
-    padding: 25px;
-    background: rgba(255, 255, 255, 0.92);
-    border-radius: 14px;
-    box-shadow: 0 4px 30px rgba(0,0,0,0.25);
-    animation: fadeIn 1.2s ease;
-    text-align: center;
-    backdrop-filter: blur(3px);
-}
-h2 { margin-top: 0; font-size: 26px; }
-p { font-size: 14px; color: #444; }
-input[type="text"],
-input[type="file"] {
-    width: 95%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-}
-.btn {
-    width: 100%;
-    padding: 12px;
-    background: #0a7f1c;
-    border: none;
-    color: white;
-    font-size: 16px;
-    border-radius: 8px;
-    cursor: pointer;
-}
-.btn:hover {
-    background: #0eb423;
-}
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
-#popup {
-    display:none;
-    position:fixed;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    background: rgba(255,255,255,0.95);
-    padding:20px;
-    border-radius:12px;
-    box-shadow:0 6px 20px rgba(0,0,0,0.4);
-    z-index:1000;
-    text-align:center;
-}
+    /* BODY & SFONDI */
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-image: url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1500&q=80');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+
+    /* KARTA (FORMULARI) */
+    .card {
+        width: 380px;
+        margin: 60px auto;
+        padding: 25px;
+        background: rgba(255, 255, 255, 0.92);
+        border-radius: 14px;
+        box-shadow: 0 4px 30px rgba(0,0,0,0.25);
+        animation: fadeIn 1.2s ease;
+        text-align: center;
+        backdrop-filter: blur(3px);
+    }
+
+    h2 {
+        margin-top: 0;
+        font-size: 26px;
+    }
+
+    p {
+        font-size: 14px;
+        color: #444;
+    }
+
+    /* INPUTET */
+    input[type="text"],
+    input[type="file"] {
+        width: 95%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        transition: 0.3s;
+    }
+
+    input:focus {
+        border-color: #2ea44f;
+        box-shadow: 0 0 6px rgba(0, 180, 0, 0.3);
+    }
+
+    /* BUTONI */
+    .btn {
+        width: 100%;
+        padding: 12px;
+        background: #0a7f1c;
+        border: none;
+        color: white;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .btn:hover {
+        background: #0eb423;
+        transform: scale(1.03);
+    }
+
+    /* ANIMACIONI KARTA */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        background: rgba(255,255,255,0.85);
+        padding: 12px;
+        border-radius: 0 12px 12px 0;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        backdrop-filter: blur(4px);
+        z-index: 999;
+    }
+
+    .sidebar a {
+        padding: 14px;
+        margin: 6px 0;
+        font-size: 24px;
+        cursor: pointer;
+        transition: 0.2s;
+        text-decoration: none;
+    }
+
+    .sidebar a:hover {
+        transform: translateX(7px);
+    }
+
+    /* MESAZHI MOTIVUES */
+    .motivation-box {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: rgba(255,255,255,0.85);
+        padding: 14px 20px;
+        border-radius: 14px;
+        color: #1e7f2e;
+        font-size: 16px;
+        box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+        backdrop-filter: blur(4px);
+    }
+
+    /* POPUP MODERN */
+    #popup {
+        display:none;
+        position:fixed;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%);
+        background: rgba(255,255,255,0.95);
+        padding:20px;
+        border-radius:12px;
+        box-shadow:0 6px 20px rgba(0,0,0,0.4);
+        z-index:1000;
+        font-size:16px;
+        text-align:center;
+        opacity:0;
+        transition: opacity 0.4s;
+    }
+
+    #popup button {
+        padding:8px 16px;
+        border:none;
+        background:#0a7f1c;
+        color:white;
+        border-radius:6px;
+        cursor:pointer;
+        transition:0.3s;
+    }
+
+    #popup button:hover {
+        background:#0eb423;
+    }
+
 </style>
 </head>
-
 <body>
 
+<!-- FORMULARI -->
 <div class="card">
     <h2>Raporto Ndotje 🌍</h2>
     <p>Shkruaj dhe dergo foto te ndotjes ne lagjen tende.</p>
 
-    <input type="text" id="lagjja" placeholder="Lagjja / Qyteti">
-    <input type="text" id="pershkrimi" placeholder="Përshkruaj problemin">
+    <input type="text" placeholder="Lagjja / Qyteti">
+    <input type="text" placeholder="Përshkruaj problemin">
     <input type="file">
 
     <button class="btn">Dërgo Raportin</button>
-
-    <p id="msg" style="color:green; font-weight:bold;"></p>
 </div>
 
+<!-- SIDEBAR FUNKSIONAL -->
+<div class="sidebar">
+    <a href="#" onclick="showPopup('Foto: Mund të ngarkoni foto të ndotjes.')">📷</a>
+    <a href="#" onclick="showPopup('Lokacion: Shkruani lagjen ose vendndodhjen.')">📍</a>
+    <a href="#" onclick="showPopup('Këshilla: Riciklo dhe ruaj natyrën.')">♻</a>
+    <a href="#" onclick="showPopup('Informacion: Kjo faqe ndihmon të raportoni ndotjen.')">ℹ</a>
+</div>
+
+<!-- MESAZH MOTIVUES -->
+<div class="motivation-box">
+    “Ruaj natyrën, ruaj të ardhmen 🌿”
+</div>
+
+<!-- POPUP FUNKSIONAL -->
 <div id="popup">
     <span id="popup-text"></span>
     <br><br>
     <button onclick="closePopup()">Mbyll</button>
 </div>
 
-<!-- FIREBASE -->
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-
 <script>
-var firebaseConfig = {
-  apiKey: "API_KEY",
-  authDomain: "PROJECT_ID.firebaseapp.com",
-  projectId: "PROJECT_ID",
-  storageBucket: "PROJECT_ID.appspot.com",
-  messagingSenderId: "SENDER_ID",
-  appId: "APP_ID"
-};
-
-firebase.initializeApp(firebaseConfig);
-var db = firebase.firestore();
-
 function showPopup(message) {
-    document.getElementById("popup-text").innerText = message;
-    document.getElementById("popup").style.display = "block";
+    const popup = document.getElementById('popup');
+    document.getElementById('popup-text').innerText = message;
+    popup.style.display = 'block';
+    setTimeout(() => { popup.style.opacity = '1'; }, 10); // efekt fade-in
 }
 
 function closePopup() {
-    document.getElementById("popup").style.display = "none";
+    const popup = document.getElementById('popup');
+    popup.style.opacity = '0'; // fade-out
+    setTimeout(() => { popup.style.display = 'none'; }, 400);
 }
-
-document.querySelector(".btn").addEventListener("click", function() {
-
-    var lagjja = document.getElementById("lagjja").value.trim();
-    var pershkrimi = document.getElementById("pershkrimi").value.trim();
-
-    if (!lagjja || !pershkrimi) {
-        alert("Plotëso të gjitha fushat ❗");
-        return;
-    }
-
-    db.collection("raportime").add({
-        lagjja: lagjja,
-        pershkrimi: pershkrimi,
-        data: new Date()
-    })
-    .then(function() {
-
-        document.getElementById("msg").innerHTML =
-        "Raporti u dërgua me sukses 💚";
-
-        showPopup("Raporti u dërgua me sukses 💚");
-
-        document.getElementById("lagjja").value = "";
-        document.getElementById("pershkrimi").value = "";
-    })
-    .catch(function(error) {
-        console.log(error);
-        alert("Gabim gjatë dërgimit ❌");
-    });
-
-});
 </script>
 
 </body>
 </html>
     
+
 
 
 
