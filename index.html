@@ -5,7 +5,6 @@
 <title>Raporto Ndotje</title>
 
 <style>
-/* (STILI JOT – I PANDRYSHUAR) */
 body {
     margin: 0;
     padding: 0;
@@ -35,11 +34,6 @@ input[type="file"] {
     margin: 10px 0;
     border-radius: 8px;
     border: 1px solid #ccc;
-    transition: 0.3s;
-}
-input:focus {
-    border-color: #2ea44f;
-    box-shadow: 0 0 6px rgba(0, 180, 0, 0.3);
 }
 .btn {
     width: 100%;
@@ -50,50 +44,13 @@ input:focus {
     font-size: 16px;
     border-radius: 8px;
     cursor: pointer;
-    transition: 0.3s;
 }
 .btn:hover {
     background: #0eb423;
-    transform: scale(1.03);
 }
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to   { opacity: 1; transform: translateY(0); }
-}
-.sidebar {
-    position: fixed;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    background: rgba(255,255,255,0.85);
-    padding: 12px;
-    border-radius: 0 12px 12px 0;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    backdrop-filter: blur(4px);
-    z-index: 999;
-}
-.sidebar a {
-    padding: 14px;
-    margin: 6px 0;
-    font-size: 24px;
-    cursor: pointer;
-    transition: 0.2s;
-    text-decoration: none;
-}
-.sidebar a:hover { transform: translateX(7px); }
-.motivation-box {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: rgba(255,255,255,0.85);
-    padding: 14px 20px;
-    border-radius: 14px;
-    color: #1e7f2e;
-    font-size: 16px;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
-    backdrop-filter: blur(4px);
 }
 #popup {
     display:none;
@@ -108,19 +65,7 @@ input:focus {
     z-index:1000;
     font-size:16px;
     text-align:center;
-    opacity:0;
-    transition: opacity 0.4s;
 }
-#popup button {
-    padding:8px 16px;
-    border:none;
-    background:#0a7f1c;
-    color:white;
-    border-radius:6px;
-    cursor:pointer;
-    transition:0.3s;
-}
-#popup button:hover { background:#0eb423; }
 </style>
 </head>
 
@@ -135,17 +80,9 @@ input:focus {
     <input type="file">
 
     <button class="btn">Dërgo Raportin</button>
-</div>
 
-<div class="sidebar">
-    <a href="#" onclick="showPopup('Foto: Mund të ngarkoni foto të ndotjes.')">📷</a>
-    <a href="#" onclick="showPopup('Lokacion: Shkruani lagjen ose vendndodhjen.')">📍</a>
-    <a href="#" onclick="showPopup('Këshilla: Riciklo dhe ruaj natyrën.')">♻</a>
-    <a href="#" onclick="showPopup('Informacion: Kjo faqe ndihmon të raportoni ndotjen.')">ℹ</a>
-</div>
-
-<div class="motivation-box">
-    “Ruaj natyrën, ruaj të ardhmen 🌿”
+    <!-- MESAZHI POSHTË BUTONIT -->
+    <p id="msg" style="color:green; font-weight:bold;"></p>
 </div>
 
 <div id="popup">
@@ -154,11 +91,12 @@ input:focus {
     <button onclick="closePopup()">Mbyll</button>
 </div>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
-const firebaseConfig = {
+<script>
+var firebaseConfig = {
   apiKey: "API_KEY",
   authDomain: "PROJECT_ID.firebaseapp.com",
   projectId: "PROJECT_ID",
@@ -167,64 +105,56 @@ const firebaseConfig = {
   appId: "APP_ID"
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+firebase.initializeApp(firebaseConfig);
+var db = firebase.firestore();
 
-/* POPUP */
 function showPopup(message) {
-    const popup = document.getElementById('popup');
-    document.getElementById('popup-text').innerText = message;
-    popup.style.display = 'block';
-    setTimeout(() => { popup.style.opacity = '1'; }, 10);
+    document.getElementById("popup-text").innerText = message;
+    document.getElementById("popup").style.display = "block";
 }
 
 function closePopup() {
-    const popup = document.getElementById('popup');
-    popup.style.opacity = '0';
-    setTimeout(() => { popup.style.display = 'none'; }, 400);
+    document.getElementById("popup").style.display = "none";
 }
 
-/* e bëjmë global që sidebar të funksionojë */
-window.showPopup = showPopup;
-window.closePopup = closePopup;
+document.querySelector(".btn").addEventListener("click", function() {
 
-/* BUTONI */
-const button = document.querySelector(".btn");
-
-button.addEventListener("click", async () => {
-
-    const lagjja = document.getElementById("lagjja").value.trim();
-    const pershkrimi = document.getElementById("pershkrimi").value.trim();
+    var lagjja = document.getElementById("lagjja").value.trim();
+    var pershkrimi = document.getElementById("pershkrimi").value.trim();
 
     if (!lagjja || !pershkrimi) {
         showPopup("Plotëso të gjitha fushat ❗");
         return;
     }
 
-    try {
-        await addDoc(collection(db, "raportime"), {
-            lagjja: lagjja,
-            pershkrimi: pershkrimi,
-            data: new Date()
-        });
+    db.collection("raportime").add({
+        lagjja: lagjja,
+        pershkrimi: pershkrimi,
+        data: new Date()
+    })
+    .then(function() {
+
+        document.getElementById("msg").innerHTML =
+        "Raporti u dërgua! Faleminderit që po ndihmon mjedisin 💚";
 
         showPopup("Raporti u dërgua me sukses ✅");
 
         document.getElementById("lagjja").value = "";
         document.getElementById("pershkrimi").value = "";
-
-    } catch (error) {
+    })
+    .catch(function(error) {
         console.error(error);
         showPopup("Gabim gjatë dërgimit ❌");
-    }
+    });
+
 });
 </script>
-    
+
 </body>
-</html>
- 
+</html> 
 
     
+
 
 
 
