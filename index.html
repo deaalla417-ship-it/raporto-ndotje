@@ -170,25 +170,33 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-window.showPopup = function(message) {
+/* POPUP */
+function showPopup(message) {
     const popup = document.getElementById('popup');
     document.getElementById('popup-text').innerText = message;
     popup.style.display = 'block';
     setTimeout(() => { popup.style.opacity = '1'; }, 10);
 }
 
-window.closePopup = function() {
+function closePopup() {
     const popup = document.getElementById('popup');
     popup.style.opacity = '0';
     setTimeout(() => { popup.style.display = 'none'; }, 400);
 }
 
-document.querySelector(".btn").addEventListener("click", async () => {
+/* e bëjmë global që sidebar të funksionojë */
+window.showPopup = showPopup;
+window.closePopup = closePopup;
 
-    const lagjja = document.getElementById("lagjja").value;
-    const pershkrimi = document.getElementById("pershkrimi").value;
+/* BUTONI */
+const button = document.querySelector(".btn");
 
-    if(lagjja === "" || pershkrimi === "") {
+button.addEventListener("click", async () => {
+
+    const lagjja = document.getElementById("lagjja").value.trim();
+    const pershkrimi = document.getElementById("pershkrimi").value.trim();
+
+    if (!lagjja || !pershkrimi) {
         showPopup("Plotëso të gjitha fushat ❗");
         return;
     }
@@ -206,17 +214,18 @@ document.querySelector(".btn").addEventListener("click", async () => {
         document.getElementById("pershkrimi").value = "";
 
     } catch (error) {
-        showPopup("Gabim gjatë dërgimit ❌");
         console.error(error);
+        showPopup("Gabim gjatë dërgimit ❌");
     }
 });
 </script>
-
+    
 </body>
 </html>
  
 
     
+
 
 
 
