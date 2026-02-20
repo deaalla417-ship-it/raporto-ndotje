@@ -63,7 +63,6 @@ input[type="file"] {
     border-radius:12px;
     box-shadow:0 6px 20px rgba(0,0,0,0.4);
     z-index:1000;
-    font-size:16px;
     text-align:center;
 }
 </style>
@@ -81,7 +80,6 @@ input[type="file"] {
 
     <button class="btn">Dërgo Raportin</button>
 
-    <!-- MESAZHI POSHTË BUTONIT -->
     <p id="msg" style="color:green; font-weight:bold;"></p>
 </div>
 
@@ -123,7 +121,7 @@ document.querySelector(".btn").addEventListener("click", function() {
     var pershkrimi = document.getElementById("pershkrimi").value.trim();
 
     if (!lagjja || !pershkrimi) {
-        showPopup("Plotëso të gjitha fushat ❗");
+        alert("Plotëso të gjitha fushat ❗");
         return;
     }
 
@@ -135,25 +133,25 @@ document.querySelector(".btn").addEventListener("click", function() {
     .then(function() {
 
         document.getElementById("msg").innerHTML =
-        "Raporti u dërgua! Faleminderit që po ndihmon mjedisin 💚";
+        "Raporti u dërgua me sukses 💚";
 
-        showPopup("Raporti u dërgua me sukses ✅");
+        showPopup("Raporti u dërgua me sukses 💚");
 
         document.getElementById("lagjja").value = "";
         document.getElementById("pershkrimi").value = "";
     })
     .catch(function(error) {
-        console.error(error);
-        showPopup("Gabim gjatë dërgimit ❌");
+        console.log(error);
+        alert("Gabim gjatë dërgimit ❌");
     });
 
 });
 </script>
 
 </body>
-</html> 
-
+</html>
     
+
 
 
 
