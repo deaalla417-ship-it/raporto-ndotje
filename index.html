@@ -214,8 +214,8 @@ const db = getFirestore(app);
 const storage = getStorage(app);
 
 async function sendReport() {
-  const location = document.getElementById("location").value;
-  const description = document.getElementById("description").value;
+  const location = document.getElementById("location").value.trim();
+  const description = document.getElementById("description").value.trim();
   const file = document.getElementById("image").files[0];
   const msg = document.getElementById("msg");
   const preview = document.getElementById("preview");
@@ -225,14 +225,19 @@ async function sendReport() {
     return;
   }
 
+  msg.innerText = "Raporti u dërgua me sukses! 💚";
+
+  document.getElementById("location").value = "";
+  document.getElementById("description").value = "";
+  document.getElementById("image").value = "";
+  preview.style.display = "none";
+
   let imageUrl = "";
 
   if (file) {
     const storageRef = ref(storage, images/${Date.now()}_${file.name});
     await uploadBytes(storageRef, file);
     imageUrl = await getDownloadURL(storageRef);
-    preview.src = imageUrl;
-    preview.style.display = "block";
   }
 
   try {
@@ -242,19 +247,12 @@ async function sendReport() {
       foto: imageUrl,
       data: new Date()
     });
-
-    msg.innerText = "Raporti u dërgua me sukses! 💚";
-
-    document.getElementById("location").value = "";
-    document.getElementById("description").value = "";
-    document.getElementById("image").value = "";
-    preview.style.display = "none";
-
   } catch (e) {
     console.error(e);
-    alert("Diçka shkoi gabim. Provoni përsëri.");
   }
 }
+
+window.sendReport = sendReport;
 </script>
 
 <script>
