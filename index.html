@@ -177,7 +177,6 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebas
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
-// Vendos të dhënat reale nga Firebase
 const firebaseConfig = {
   apiKey: "API_KEY",
   authDomain: "PROJECT_ID.firebaseapp.com",
@@ -222,8 +221,8 @@ async function sendReport() {
         });
 
         msg.innerText = "Raporti u dërgua me sukses! 💚";
+        showPopup("Raporti u dërgua me sukses! 💚");
 
-        // Pastrimi i fushave
         document.getElementById("location").value = "";
         document.getElementById("description").value = "";
         document.getElementById("image").value = "";
@@ -251,17 +250,3 @@ function closePopup() {
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
