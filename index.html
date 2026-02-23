@@ -195,30 +195,11 @@ input:focus {
   <button onclick="closePopup()">Mbyll</button>
 </div>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
-
-const firebaseConfig = {
-  apiKey: "API_KEY",
-  authDomain: "PROJECT_ID.firebaseapp.com",
-  projectId: "PROJECT_ID",
-  storageBucket: "PROJECT_ID.appspot.com",
-  messagingSenderId: "XXXX",
-  appId: "XXXX"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const storage = getStorage(app);
-
-async function sendReport() {
+<script>
+function sendReport() {
   const location = document.getElementById("location").value.trim();
   const description = document.getElementById("description").value.trim();
-  const file = document.getElementById("image").files[0];
   const msg = document.getElementById("msg");
-  const preview = document.getElementById("preview");
 
   if (!location || !description) {
     alert("Plotëso të gjitha fushat!");
@@ -230,32 +211,8 @@ async function sendReport() {
   document.getElementById("location").value = "";
   document.getElementById("description").value = "";
   document.getElementById("image").value = "";
-  preview.style.display = "none";
-
-  let imageUrl = "";
-
-  if (file) {
-    const storageRef = ref(storage, images/${Date.now()}_${file.name});
-    await uploadBytes(storageRef, file);
-    imageUrl = await getDownloadURL(storageRef);
-  }
-
-  try {
-    await addDoc(collection(db, "raportime"), {
-      vendndodhja: location,
-      pershkrimi: description,
-      foto: imageUrl,
-      data: new Date()
-    });
-  } catch (e) {
-    console.error(e);
-  }
 }
 
-window.sendReport = sendReport;
-</script>
-
-<script>
 function showPopup(message) {
   const popup = document.getElementById('popup');
   document.getElementById('popup-text').innerText = message;
@@ -276,3 +233,4 @@ function closePopup() {
 
 </body>
 </html>
+
