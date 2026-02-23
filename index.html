@@ -5,107 +5,194 @@
 <title>Raporto Ndotje</title>
 
 <style>
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-        background-image: url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1500&q=80');
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-    }
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-image: url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1500&q=80');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
 
-    .card {
-        width: 380px;
-        margin: 60px auto;
-        padding: 25px;
-        background: rgba(255, 255, 255, 0.92);
-        border-radius: 14px;
-        box-shadow: 0 4px 30px rgba(0,0,0,0.25);
-        animation: fadeIn 1.2s ease;
-        text-align: center;
-        backdrop-filter: blur(3px);
-    }
+.card {
+  width: 380px;
+  margin: 60px auto;
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 14px;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.25);
+  animation: fadeIn 1.2s ease;
+  text-align: center;
+  backdrop-filter: blur(3px);
+}
 
-    h2 { margin-top: 0; font-size: 26px; }
-    p { font-size: 14px; color: #444; }
+h2 {
+  margin-top: 0;
+  font-size: 26px;
+}
 
-    input[type="text"], input[type="file"] {
-        width: 95%;
-        padding: 10px;
-        margin: 10px 0;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-        transition: 0.3s;
-    }
+p {
+  font-size: 14px;
+  color: #444;
+}
 
-    input:focus {
-        border-color: #2ea44f;
-        box-shadow: 0 0 6px rgba(0, 180, 0, 0.3);
-    }
+input[type="text"],
+input[type="file"] {
+  width: 95%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  transition: 0.3s;
+}
 
-    .btn {
-        width: 100%;
-        padding: 12px;
-        background: #0a7f1c;
-        border: none;
-        color: white;
-        font-size: 16px;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
+input:focus {
+  border-color: #2ea44f;
+  box-shadow: 0 0 6px rgba(0, 180, 0, 0.3);
+}
 
-    .btn:hover { background: #0eb423; transform: scale(1.03); }
+.btn {
+  width: 100%;
+  padding: 12px;
+  background: #0a7f1c;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
 
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
+.btn:hover {
+  background: #0eb423;
+  transform: scale(1.03);
+}
 
-    #popup {
-        display:none;
-        position:fixed;
-        top:50%;
-        left:50%;
-        transform:translate(-50%,-50%);
-        background: rgba(255,255,255,0.95);
-        padding:20px;
-        border-radius:12px;
-        box-shadow:0 6px 20px rgba(0,0,0,0.4);
-        z-index:1000;
-        font-size:16px;
-        text-align:center;
-        opacity:0;
-        transition: opacity 0.4s;
-    }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-    #popup button {
-        padding:8px 16px;
-        border:none;
-        background:#0a7f1c;
-        color:white;
-        border-radius:6px;
-        cursor:pointer;
-    }
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  background: rgba(255,255,255,0.85);
+  padding: 12px;
+  border-radius: 0 12px 12px 0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  backdrop-filter: blur(4px);
+  z-index: 999;
+}
+
+.sidebar a {
+  padding: 14px;
+  margin: 6px 0;
+  font-size: 24px;
+  cursor: pointer;
+  transition: 0.2s;
+  text-decoration: none;
+}
+
+.sidebar a:hover {
+  transform: translateX(7px);
+}
+
+.motivation-box {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(255,255,255,0.85);
+  padding: 14px 20px;
+  border-radius: 14px;
+  color: #1e7f2e;
+  font-size: 16px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+  backdrop-filter: blur(4px);
+}
+
+#popup {
+  display:none;
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  background: rgba(255,255,255,0.95);
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.4);
+  z-index:1000;
+  font-size:16px;
+  text-align:center;
+  opacity:0;
+  transition: opacity 0.4s;
+}
+
+#popup button {
+  padding:8px 16px;
+  border:none;
+  background:#0a7f1c;
+  color:white;
+  border-radius:6px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+#popup button:hover {
+  background:#0eb423;
+}
+
+#preview {
+  display:none;
+  max-width: 90%;
+  margin-top: 10px;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+#msg {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #1e7f2e;
+}
 </style>
 </head>
+
 <body>
 
 <div class="card">
-    <h2>Raporto Ndotje 🌍</h2>
-    <p>Shkruaj dhe dergo foto të ndotjes në lagjen tënde.</p>
+  <h2>Raporto Ndotje 🌍</h2>
+  <p>Shkruaj dhe dergo foto të ndotjes në lagjen tënde.</p>
 
-    <input type="text" id="location" placeholder="Lagjja / Qyteti">
-    <input type="text" id="description" placeholder="Përshkruaj problemin">
-    <input type="file" id="image">
-    <button class="btn" onclick="sendReport()">Dërgo Raportin</button>
+  <input type="text" id="location" placeholder="Lagjja / Qyteti">
+  <input type="text" id="description" placeholder="Përshkruaj problemin">
+  <input type="file" id="image">
+
+  <img id="preview">
+
+  <button class="btn" onclick="sendReport()">Dërgo Raportin</button>
+  <p id="msg"></p>
+</div>
+
+<div class="sidebar">
+  <a href="#" onclick="showPopup('Foto: Mund të ngarkoni foto të ndotjes.')">📷</a>
+  <a href="#" onclick="showPopup('Lokacion: Shkruani lagjen ose vendndodhjen.')">📍</a>
+  <a href="#" onclick="showPopup('Këshilla: Riciklo dhe ruaj natyrën.')">♻</a>
+  <a href="#" onclick="showPopup('Informacion: Kjo faqe ndihmon të raportoni ndotjen.')">ℹ</a>
+</div>
+
+<div class="motivation-box">
+  “Ruaj natyrën, ruaj të ardhmen 🌿”
 </div>
 
 <div id="popup">
-    <span id="popup-text"></span>
-    <br><br>
-    <button onclick="closePopup()">Mbyll</button>
+  <span id="popup-text"></span>
+  <br><br>
+  <button onclick="closePopup()">Mbyll</button>
 </div>
 
 <script type="module">
@@ -126,56 +213,66 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const storage = getStorage(app);
 
-window.sendReport = async function() {
-    const location = document.getElementById("location").value;
-    const description = document.getElementById("description").value;
-    const file = document.getElementById("image").files[0];
+async function sendReport() {
+  const location = document.getElementById("location").value;
+  const description = document.getElementById("description").value;
+  const file = document.getElementById("image").files[0];
+  const msg = document.getElementById("msg");
+  const preview = document.getElementById("preview");
 
-    if (!location || !description) {
-        alert("Plotëso të gjitha fushat!");
-        return;
-    }
+  if (!location || !description) {
+    alert("Plotëso të gjitha fushat!");
+    return;
+  }
 
-    let imageUrl = "";
+  let imageUrl = "";
 
-    if (file) {
-        const storageRef = ref(storage, `images/${Date.now()}_${file.name}`);
-        await uploadBytes(storageRef, file);
-        imageUrl = await getDownloadURL(storageRef);
-    }
+  if (file) {
+    const storageRef = ref(storage, images/${Date.now()}_${file.name});
+    await uploadBytes(storageRef, file);
+    imageUrl = await getDownloadURL(storageRef);
+    preview.src = imageUrl;
+    preview.style.display = "block";
+  }
 
-    try {
-        await addDoc(collection(db, "raportime"), {
-            vendndodhja: location,
-            pershkrimi: description,
-            foto: imageUrl,
-            data: new Date()
-        });
+  try {
+    await addDoc(collection(db, "raportime"), {
+      vendndodhja: location,
+      pershkrimi: description,
+      foto: imageUrl,
+      data: new Date()
+    });
 
-        showPopup("Raporti u dërgua me sukses! 💚");
+    msg.innerText = "Raporti u dërgua me sukses! 💚";
 
-        document.getElementById("location").value = "";
-        document.getElementById("description").value = "";
-        document.getElementById("image").value = "";
+    document.getElementById("location").value = "";
+    document.getElementById("description").value = "";
+    document.getElementById("image").value = "";
+    preview.style.display = "none";
 
-    } catch (e) {
-        alert("Diçka shkoi gabim. Provoni përsëri.");
-    }
+  } catch (e) {
+    console.error(e);
+    alert("Diçka shkoi gabim. Provoni përsëri.");
+  }
 }
 </script>
 
 <script>
 function showPopup(message) {
-    const popup = document.getElementById('popup');
-    document.getElementById('popup-text').innerText = message;
-    popup.style.display = 'block';
-    setTimeout(() => { popup.style.opacity = '1'; }, 10);
+  const popup = document.getElementById('popup');
+  document.getElementById('popup-text').innerText = message;
+  popup.style.display = 'block';
+  setTimeout(() => {
+    popup.style.opacity = '1';
+  }, 10);
 }
 
 function closePopup() {
-    const popup = document.getElementById('popup');
-    popup.style.opacity = '0';
-    setTimeout(() => { popup.style.display = 'none'; }, 400);
+  const popup = document.getElementById('popup');
+  popup.style.opacity = '0';
+  setTimeout(() => {
+    popup.style.display = 'none';
+  }, 400);
 }
 </script>
 
